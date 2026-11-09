@@ -1,0 +1,91 @@
+/**
+ * 设计令牌（Design Tokens）
+ * 来源：ui-ux-pro-max「Minimalism & Swiss Style」设计系统 + 需求指定背景。
+ *
+ * 硬性约束：
+ * 1. 页面背景必须使用下方 --app-background-image，不得替换。
+ * 2. 全站严禁出现紫色系配色（色相 ~260-300、violet/purple/fuchsia 一律禁用）。
+ *    本文件只用海军蓝（#0f172a / #334155）、冷蓝（#0369a1 / #e0f2fe）、
+ *    中性灰（#f8fafc / #e2e8f0）与功能色（红/绿/琥珀）。
+ */
+:root {
+  color-scheme: light;
+
+  /* ---------- 品牌与语义色 ---------- */
+  --color-primary: #0f172a;
+  --color-on-primary: #ffffff;
+  --color-secondary: #334155;
+  --color-on-secondary: #ffffff;
+  --color-accent: #0369a1;
+  --color-accent-hover: #075985;
+  --color-accent-soft: #e0f2fe;
+  --color-on-accent: #ffffff;
+  --color-foreground: #020617;
+  --color-muted: #e8ecf1;
+  --color-muted-foreground: #475569;
+  --color-border: #e2e8f0;
+  --color-ring: #0f172a;
+
+  /* ---------- 功能色 ---------- */
+  --color-destructive: #dc2626;
+  --color-destructive-soft: #fef2f2;
+  --color-success: #15803d;
+  --color-success-soft: #f0fdf4;
+  --color-warning: #b45309;
+  --color-warning-soft: #fffbeb;
+  --color-info: #0369a1;
+  --color-info-soft: #f0f9ff;
+
+  /* ---------- 页面背景（需求指定，不可替换） ---------- */
+  --app-background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --color-background: #f8fafc;
+
+  /* ---------- 表面（半透明玻璃质感，保持简洁） ---------- */
+  --surface-raised: rgba(255, 255, 255, 0.9);
+  --surface-base: rgba(255, 255, 255, 0.74);
+  --surface-solid: #ffffff;
+  --surface-sunken: rgba(241, 245, 249, 0.72);
+
+  /* ---------- 描边 ---------- */
+  --border-subtle: rgba(226, 232, 240, 0.9);
+  --border-strong: #cbd5e1;
+
+  /* ---------- 间距（8px 基准） ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+
+  /* ---------- 圆角 ---------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* ---------- 阴影（Swiss 风格：克制、无夸张投影） ---------- */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  /* ---------- 字体 ---------- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-mono: 'SFMono-Regular', ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  /* ---------- 动效 ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+
+  /* ---------- 布局尺寸 ---------- */
+  --sidebar-width: 276px;
+  --topbar-height: 56px;
+  --rail-width: 340px;
+}
