@@ -1,83 +1,98 @@
-# frontend — 前端模块
+# 车险出单智能体 · 前端
 
-## 负责人
+车险出单智能体的前端 UI 骨架。**当前只有界面与交互结构，后端 API 与 Agent 能力一律未接入**，
+涉及这些能力的位置都用「此地方未导入」占位符标注，并集中登记在
+`src/api/placeholders.ts`。
 
-| 角色 | 姓名 | 说明 |
+> 需求依据：仓库根目录 `前端.md`、`车险出单需求.md`。
+> 面向协作方的工程说明：仓库根目录 `AGENTS.md`。
+
+## 技术栈
+
+| 类别 | 选型 |
+| --- | --- |
+| 框架 | React 18 + TypeScript 5 + Vite 6 |
+| UI 组件 | Ant Design 5（中文 locale） |
+| 路由 | react-router-dom 6 |
+| 请求 | Axios（统一实例 + 响应解包，尚未发出真实请求） |
+| 样式 | 原生 CSS + CSS 变量设计令牌（无 CSS-in-JS） |
+
+## 启动
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+```
+
+其它命令：
+
+```bash
+npm run typecheck  # tsc --noEmit
+npm run build      # 类型检查 + 生产构建，产物在 dist/
+npm run preview    # 预览构建产物
+node scripts/screenshot.mjs   # 需先启动 dev，截图输出到仓库根 screenshots/
+```
+
+浏览器打开后会跳转到 `/login`。当前登录不校验密码，选择「普通用户 / 业务员」后
+点登录即可进入对应视图（身份只写入 localStorage，属演示行为）。
+
+## 页面与角色
+
+| 路由 | 页面 | 权限 |
 | --- | --- | --- |
-| 负责人 | **成员 A** | 前端开发与用户交互 |
-| 协作方 | 你(组长/后端) | 提供 `/api/v1` 业务接口 |
-| 协作方 | 成员 C(AI 智能体) | 对齐聊天消息、方案卡片、追问、人工转接协议 |
+| `/login` | 登录 | 公开 |
+| `/` | 车险入口（财险、人寿险显示暂未开放） | 登录用户 |
+| `/chat` | 办理会话（聊天 + 右侧流程/资料栏） | 登录用户 |
+| `/orders` | 订单 | 登录用户 |
+| `/policy`、`/policy/:policyId` | 保单明细 | 登录用户 |
+| `/handoff` | 人工接管 | 登录用户 |
+| `/workbench` | 业务员工作台（批量操作） | 仅 `role === 'agent'` |
 
-## 模块职责
-
-本模块负责用户端与业务员端的全部页面和交互:
-
-1. **用户端**:登录、聊天对话、方案卡片、行驶证/身份证上传、订单进度、保单查看。
-2. **业务员端**:客户会话与订单列表、批量操作、人工接管工作台。
-3. **聊天交互**:文本、图片、方案卡片、业务状态卡片的展示;后续可选 SSE 流式输出。
-4. **接口调用**:统一走 `src/api/`,页面组件不得散落硬编码接口 URL。
-5. **状态展示**:只展示服务端返回的 `code` / 状态,不自行判断报价、核保、支付是否成功。
-6. **未实现能力**:统一使用占位符组件,不伪造后端数据。
-
-## 预期技术栈
-
-| 项目 | 选型 | 状态 |
-| --- | --- | --- |
-| 框架 | React 18 + TypeScript | ✅ 沿用原方案 |
-| 构建 | Vite 6 | ✅ |
-| UI 组件 | Ant Design 5(中文 locale) | ✅ |
-| 图标 | @ant-design/icons | ✅ |
-| 路由 | react-router-dom 6 | ✅ |
-| 请求 | axios(统一实例) | ✅ |
-| 日期 | dayjs | ✅ |
-| 样式 | 原生 CSS + CSS 变量 | ✅ |
-| 包管理 | npm | ✅ |
-| 代码检查 | ESLint + TypeScript strict | ⚠️ 待确认具体配置 |
-
-> 当前仓库中的 `frontend/` 只是**目录骨架**,实际工程由成员 A 提交。技术栈以成员 A 最终落地为准,变更需同步本表。
+权限由 `src/router/guards.tsx` 控制，非业务员访问 `/workbench` 会看到 403 页面。
 
 ## 目录结构
 
-```text
-frontend/
-├─ README.md
-├─ index.html              # 待成员 A 补充
-├─ package.json            # 待成员 A 补充
-├─ vite.config.ts          # 待成员 A 补充
-├─ tsconfig.json           # 待成员 A 补充
-├─ .env.example            # VITE_API_BASE_URL,入库
-├─ public/                 # 静态资源
-└─ src/
-   ├─ api/                 # 接口封装(按业务模块拆分)
-   ├─ assets/              # 图片、字体等
-   ├─ components/          # 通用组件(聊天气泡、上传、方案卡片等)
-   ├─ pages/               # 登录、聊天、订单、保单、业务员工作台
-   ├─ router/              # 路由与权限守卫
-   ├─ store/               # 登录态、当前会话、当前车辆
-   ├─ styles/              # 全局样式与设计变量
-   ├─ types/               # 与后端约定的 TypeScript 类型
-   └─ utils/               # 文件校验、格式化等
+```
+src/
+  api/          接口层：placeholders.ts（占位符注册表）、http.ts（Axios 实例）、index.ts（模块化接口骨架）
+  components/   聊天气泡、方案卡片、状态卡片、上传位、流程步骤、占位符组件等
+  data/         flow.ts（七阶段定义）、samples.ts（静态占位数据）
+  layouts/      AppLayout（侧边栏 + 顶栏 + 内容区）
+  pages/        登录、车险入口、聊天、订单、保单、业务员工作台、人工接管、404/403
+  router/       路由表与角色守卫
+  store/        登录态、当前会话、当前车辆/阶段（Context）
+  styles/       tokens.css（设计令牌）、global.css（布局与组件样式）
+  theme/        antdTheme.ts（Ant Design 主题映射）
+  types/        与后端约定的 TypeScript 类型草案
+  utils/        金额/时间格式化、图片校验
 ```
 
-## 开发约定
+## 设计要求（已落实，改动时请保持）
 
-- 接口前缀统一为 `/api/v1`,通过 `VITE_API_BASE_URL` 配置服务地址。
-- 登录态、会话、车辆等跨页面状态放在 `src/store/`,不要散落在页面里。
-- 后端返回统一为 `{ code, message, data, traceId }`,只有 `code === 0` 才算成功。
-- 外部系统(保险、支付、人工)的模拟结果必须展示「演示数据」标识,不得伪装成真实结果。
-- `.env` 不入库,只提交 `.env.example`。
+- 页面背景固定为 `linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)`（`tokens.css` → `--app-background-image`）。
+- **严禁使用紫色系配色**（violet / purple / fuchsia / 色相 260–300 一律禁止）。
+  全站配色为海军蓝 `#0f172a`、冷蓝 `#0369a1`、中性灰与红/绿/琥珀功能色。
+- 风格：极简 / Swiss，克制阴影、细描边、大量留白，图标全部使用 SVG（`@ant-design/icons`，不使用 emoji）。
 
-## 边界与约束
+## 占位符约定
 
-- 不直接访问数据库;所有业务数据通过后端 API。
-- 不计算保费、不判断核保/支付结果,以后端返回为准。
-- 不实现真实保险公司、支付渠道的前端加密逻辑(待接口资料到位)。
-- 不删除或覆盖其他成员的文件;接口字段变更先改 `docs/接口文档.md`。
+不要在页面里直接写「未实现」之类文案。新增后端/Agent 依赖时：
 
-## 待确认事项
+1. 在 `src/api/placeholders.ts` 的 `SPECS` 中追加一条（标题、说明、预期接口、补齐方、界面位置）；
+2. 页面用 `<PlaceholderBlock id="…" />`、`<PlaceholderInline id="…" />`
+   或 `useNotImported()` 弹出说明；
+3. 同步更新根目录 `AGENTS.md` 的占位符清单。
 
-- [ ] 前端工程重新初始化的脚手架命令与目录细节
-- [ ] Node / npm 版本(本机已配置 npm 国内镜像)
-- [ ] 是否使用 SSE 流式聊天
-- [ ] 业务员批量操作的页面形态
-- [ ] 设计规范与配色(沿用原方案还是重新定义)
+## 常见问题
+
+- **`npm install` 报缓存目录不可写**：把缓存指到工作区内，例如
+  `npm install --cache ./.npm-cache`。
+- **`npm run build` 报 esbuild 临时文件 `Access is denied`**：把临时目录指到工作区内再构建，
+  PowerShell 下：`$env:TEMP = "$PWD\.build-tmp"; $env:TMP = $env:TEMP; npm run build`。
+- **dev 时改文件导致 watcher 报 `EBUSY`**：`vite.config.ts` 已忽略 `.npm-cache`、`.build-tmp`、
+  `*.tmpdir` 与 `screenshots`，如仍出现请检查是否新增了临时目录。
+
+## 尚未包含
+
+真实鉴权、会话与消息持久化、图片上传/OCR、方案生成与修改、报价、核保、支付、
+保单、业务员批量接口、人工接管平台、行业术语知识库。详见 `AGENTS.md`。
