@@ -1,0 +1,8 @@
+[
+ {"term":"机动车第三者责任保险","code":"third_party_liability","aliases":["三者","第三者"],"definition":"对应第三者责任险种，保额表示约定责任限额。具体保险责任以产品条款为准。","version":1,"reviewer":"待团队审核"},
+ {"term":"机动车损失保险","code":"vehicle_damage","aliases":["车损"],"definition":"车辆损失相关险种，责任范围以产品条款为准。","version":1,"reviewer":"待团队审核"},
+ {"term":"机动车交通事故责任强制保险","code":"compulsory","aliases":["交强"],"definition":"交强险的规范名称。","version":1,"reviewer":"待团队审核"},
+ {"term":"车辆识别代号","code":"vin","aliases":["车架号","VIN","vin"],"definition":"车辆识别代号，业务查询时使用 vin 字段。","version":1,"reviewer":"待团队审核"},
+ {"term":"核保","code":"underwriting","aliases":["核保"],"definition":"保险公司审核投保资料并返回是否承保及补件要求。","version":1,"reviewer":"待团队审核"},
+ {"term":"出单","code":"policy","aliases":["出单","保单"],"definition":"保险单签发，具体结果以业务系统返回为准。","version":1,"reviewer":"待团队审核"}
+]
