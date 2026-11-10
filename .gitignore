@@ -1,0 +1,11 @@
+.env
+.env.local
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+mock_files/
+*.jpg
+.vscode/
+.idea/
+.DS_Store
