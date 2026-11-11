@@ -1,0 +1,30 @@
+# 本地开发配置（dev profile）
+# 激活方式：启动时加 --spring.profiles.active=dev
+# 敏感信息全部引用 .env 中的环境变量，真实值不入库
+
+spring:
+  config:
+    import: "optional:env:"  # 允许从 .env 加载环境变量（需 Spring Boot 3.4+ env post processor）
+
+  datasource:
+    # Docker MySQL（3307）— 默认使用
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3307}/${DB_NAME:car_insurance}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:change_me_dev_only}
+
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+
+# dev 下 SQL 日志开细一点，方便调试
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    root: INFO
+    com.example.carinsurance: DEBUG
+    com.baomidou.mybatisplus: INFO
+    com.zaxxer.hikari: INFO
