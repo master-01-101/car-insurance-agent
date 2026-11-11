@@ -164,7 +164,11 @@ public class ConversationService {
 
     /**
      * 更新会话（修改标题 / 关闭）。
+     *
+     * @deprecated 请使用 {@link #updateTitle(Long, String)} 或 {@link #close(Long)}。
+     *             保留此方法仅为兼容旧调用。
      */
+    @Deprecated
     @Transactional
     public ConversationResponse update(Long conversationId, UpdateConversationRequest req) {
         Conversation conv = conversationMapper.selectById(conversationId);
@@ -174,17 +178,52 @@ public class ConversationService {
         checkOwnership(conv);
 
         if ("CLOSED".equals(req.getStatus())) {
-            if ("CLOSED".equals(conv.getStatus())) {
-                throw new BusinessException(ResultCode.STATE_CONFLICT, "会话已关闭");
-            }
-            conv.setStatus("CLOSED");
-            conv.setClosedAt(LocalDateTime.now());
-            conversationMapper.updateById(conv);
-            log.info("关闭会话 id={}", conversationId);
+            return close(conversationId);
         } else {
             throw new BusinessException(ResultCode.PARAM_ERROR, "当前仅支持关闭会话");
         }
+    }
 
+    /**
+     * 修改会话标题。
+     * 归属校验：必须是会话的 customer_id 或 salesman_id。
+     * 权限校验：CUSTOMER 可以改自己会话的标题；SALESMAN（归属）也可改；ADMIN 放行。
+     */
+    @Transactional
+    public ConversationResponse updateTitle(Long conversationId, String title) {
+        Conversation conv = conversationMapper.selectById(conversationId);
+        if (conv == null) {
+            throw new BusinessException(ResultCode.NOT_FOUND, "会话不存在");
+        }
+        checkOwnership(conv);
+        // 已关闭的会话仍可改标题（不影响历史记录），此处不做状态限制
+        conv.setTitle(title.trim());
+        conversationMapper.updateById(conv);
+        log.info("会话标题更新 id={} newTitle={}", conversationId, title.trim());
+        return toResponse(conv);
+    }
+
+    /**
+     * 关闭会话（独立端点）。
+     * 归属校验：同 checkOwnership。
+     * 状态校验：已关闭则抛 STATE_CONFLICT。
+     * 关闭后消息历史、附件、关联订单均保留（status=CLOSED，不物理删除）。
+     */
+    @Transactional
+    public ConversationResponse close(Long conversationId) {
+        Conversation conv = conversationMapper.selectById(conversationId);
+        if (conv == null) {
+            throw new BusinessException(ResultCode.NOT_FOUND, "会话不存在");
+        }
+        checkOwnership(conv);
+
+        if ("CLOSED".equals(conv.getStatus())) {
+            throw new BusinessException(ResultCode.STATE_CONFLICT, "会话已关闭");
+        }
+        conv.setStatus("CLOSED");
+        conv.setClosedAt(LocalDateTime.now());
+        conversationMapper.updateById(conv);
+        log.info("关闭会话 id={}", conversationId);
         return toResponse(conv);
     }
 
