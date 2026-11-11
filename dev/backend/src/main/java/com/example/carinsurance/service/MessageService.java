@@ -12,7 +12,10 @@ import com.example.carinsurance.exception.BusinessException;
 import com.example.carinsurance.mapper.ChatMessageMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -33,13 +36,22 @@ public class MessageService {
 
     private final ChatMessageMapper messageMapper;
     private final ConversationService conversationService;
+    private final ApplicationContext ctx; // 注入 Spring 容器，用来拿自身代理（REQUIRES_NEW 事务必须走代理）
+
+    /** 拿 Spring 代理，保证 @Transactional(REQUIRES_NEW) 生效 */
+    private MessageService self() {
+        return ctx.getBean(MessageService.class);
+    }
 
     /**
      * 发送用户消息并（模拟）返回 AI 回复。
      *
+     * <p>幂等：同一 conversation_id + client_msg_id 由 DB 唯一索引保证；命中后直接返回已有消息。</p>
+     * <p>并发：用户消息与 AI 回复各用独立小事务（REQUIRES_NEW），FOR UPDATE 锁范围互不交叠 → 无死锁。</p>
+     * <p>AI 回复：PROCESSING → 模拟逻辑 → COMPLETED；异常时 FAILED + payload_json 记录错误。</p>
+     *
      * @return 两条消息：[用户消息, AI 消息]
      */
-    @Transactional
     public SendMessageResult send(Long conversationId, SendMessageRequest req) {
         // 1. 加载会话 + 归属校验 + 可写校验
         Conversation conv = conversationService.getConversationEntity(conversationId);
@@ -60,49 +72,17 @@ public class MessageService {
             }
         }
 
-        // 3. 取 seq（会话内最后一条 seq + 1）
-        ChatMessage lastSeqRecord = messageMapper.selectOne(new LambdaQueryWrapper<ChatMessage>()
-                .eq(ChatMessage::getConversationId, conversationId)
-                .select(ChatMessage::getSeq)
-                .orderByDesc(ChatMessage::getSeq)
-                .last("LIMIT 1"));
-        int nextSeq = (lastSeqRecord == null || lastSeqRecord.getSeq() == null) ? 1 : lastSeqRecord.getSeq() + 1;
+        // 3. 落库用户消息（独立小事务，锁范围仅覆盖用户消息）
+        ChatMessage userMsg = self().insertUserMessageWithLock(conversationId, req.getContent(), req.getClientMsgId());
 
-        // 4. 落库用户消息
-        ChatMessage userMsg = ChatMessage.builder()
-                .msgNo("MSG_" + UUID.randomUUID().toString().replace("-", "").substring(0, 24))
-                .conversationId(conversationId)
-                .seq(nextSeq)
-                .senderType("USER")
-                .messageType("TEXT")
-                .content(req.getContent())
-                .requestId(org.slf4j.MDC.get("requestId"))
-                .clientMsgId(req.getClientMsgId())
-                .status("COMPLETED")
-                .build();
-        messageMapper.insert(userMsg);
+        // 4. （本阶段）模拟 AI 回复（独立小事务，锁范围仅覆盖 AI 回复）
+        //    二期改为：Java 异步调用 C FastAPI Agent → 拿到回复内容 → 调 saveAssistantMessage() 落库
+        ChatMessage assistantMsg = self().saveMockAssistantReplyLocked(conversationId, userMsg.getId(), req.getContent());
 
-        // 5. （本阶段）模拟 AI 回复：保存一条 ASSISTANT 消息
-        //    二期改为：调用 C FastAPI Agent → 拿到回复内容 → 落库
-        int assistantSeq = nextSeq + 1;
-        ChatMessage assistantMsg = ChatMessage.builder()
-                .msgNo("MSG_" + UUID.randomUUID().toString().replace("-", "").substring(0, 24))
-                .conversationId(conversationId)
-                .seq(assistantSeq)
-                .senderType("ASSISTANT")
-                .messageType("TEXT")
-                .content(buildMockReply(req.getContent()))
-                .requestId(org.slf4j.MDC.get("requestId"))
-                .status("COMPLETED")
-                .build();
-        messageMapper.insert(assistantMsg);
+        // 5. 更新会话 lastMessageAt / messageCount
+        self().updateConversationAfterSend(conv, 2);
 
-        // 6. 更新会话 lastMessageAt / messageCount
-        conv.setLastMessageAt(LocalDateTime.now());
-        conv.setMessageCount((conv.getMessageCount() == null ? 0 : conv.getMessageCount()) + 2);
-        conversationService.updateLastMessage(conv);
-
-        log.info("消息已落库 conversationId={} userSeq={} assistantSeq={}", conversationId, nextSeq, assistantSeq);
+        log.info("消息已落库 conversationId={} userSeq={} assistantSeq={}", conversationId, userMsg.getSeq(), assistantMsg.getSeq());
 
         return new SendMessageResult(toResponse(userMsg), toResponse(assistantMsg));
     }
@@ -153,6 +133,133 @@ public class MessageService {
     }
 
     // ---------- 内部辅助 ----------
+
+    /**
+     * 落库用户消息（独立小事务）。
+     * FOR UPDATE 行锁 + INSERT 在同一 REQUIRES_NEW 事务内完成 → commit 后立即释放锁 → 无死锁。
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public ChatMessage insertUserMessageWithLock(Long conversationId, String content, String clientMsgId) {
+        int nextSeq = nextSeqLocked(conversationId);
+        try {
+            ChatMessage msg = ChatMessage.builder()
+                    .msgNo("MSG_" + UUID.randomUUID().toString().replace("-", "").substring(0, 24))
+                    .conversationId(conversationId)
+                    .seq(nextSeq)
+                    .senderType("USER")
+                    .messageType("TEXT")
+                    .content(content)
+                    .requestId(org.slf4j.MDC.get("requestId"))
+                    .clientMsgId(clientMsgId)
+                    .status("COMPLETED")
+                    .build();
+            messageMapper.insert(msg);
+            return msg;
+        } catch (DuplicateKeyException e) {
+            log.warn("用户消息 seq 冲突 conversationId={} seq={}", conversationId, nextSeq);
+            throw new BusinessException(ResultCode.INTERNAL_ERROR, "消息序号冲突，请稍后重试");
+        }
+    }
+
+    /**
+     * 取会话内下一个 seq（带 FOR UPDATE 行锁）。
+     * 需在事务内调用（REQUIRES_NEW 小事务即可）。
+     */
+    private int nextSeqLocked(Long conversationId) {
+        Integer maxSeq = messageMapper.selectMaxSeqForUpdate(conversationId);
+        return maxSeq == null ? 1 : maxSeq + 1;
+    }
+
+    /**
+     * 模拟 AI 回复（独立小事务）。
+     * FOR UPDATE 行锁 + INSERT + UPDATE 在同一 REQUIRES_NEW 事务内完成。
+     * 异常时 status=FAILED，payload_json 存错误信息（不暴露堆栈）。
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public ChatMessage saveMockAssistantReplyLocked(Long conversationId, Long replyToUserId, String userContent) {
+        int seq = nextSeqLocked(conversationId);
+        ChatMessage processing = ChatMessage.builder()
+                .msgNo("MSG_" + UUID.randomUUID().toString().replace("-", "").substring(0, 24))
+                .conversationId(conversationId)
+                .seq(seq)
+                .senderType("ASSISTANT")
+                .messageType("TEXT")
+                .content(null)
+                .requestId(org.slf4j.MDC.get("requestId"))
+                .replyToMessageId(replyToUserId)
+                .status("PROCESSING")
+                .build();
+        messageMapper.insert(processing);
+
+        try {
+            processing.setContent(buildMockReply(userContent));
+            processing.setStatus("COMPLETED");
+            messageMapper.updateById(processing);
+            log.info("模拟 AI 回复完成 conversationId={} msgId={}", conversationId, processing.getId());
+        } catch (Exception e) {
+            log.error("模拟 AI 回复失败 conversationId={}", conversationId, e);
+            processing.setStatus("FAILED");
+            String errMsg = (e.getMessage() == null ? "unknown" : e.getMessage());
+            String err = errMsg.replaceAll("[\"\\n\\r]", " ").substring(0, Math.min(200, errMsg.length()));
+            processing.setPayloadJson("{\"error\":\"" + err + "\"}");
+            messageMapper.updateById(processing);
+        }
+        return processing;
+    }
+
+    /**
+     * 更新会话 lastMessageAt / messageCount。
+     * 独立小事务避免与消息表行锁交互产生死锁。
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public void updateConversationAfterSend(Conversation conv, int delta) {
+        conv.setLastMessageAt(LocalDateTime.now());
+        conv.setMessageCount((conv.getMessageCount() == null ? 0 : conv.getMessageCount()) + delta);
+        conversationService.updateLastMessage(conv);
+    }
+
+    /**
+     * 供 AI Agent 集成调用的**公开内部方法**：保存 AI 回复。
+     *
+     * <p>二期架构：Java Controller 收到用户消息 → Java 异步调 C FastAPI Agent → Agent 回调 Java 内部 Service
+     * 或 Java 轮询拿到 AI 回复 → 调此方法落库。</p>
+     *
+     * <p>独立 REQUIRES_NEW 事务：FOR UPDATE + INSERT 在一个小事务里完成 → commit 后立即释放锁。</p>
+     *
+     * @param conversationId    会话 id
+     * @param replyToMessageId  关联的用户消息 id（可为 null）
+     * @param content           AI 回复内容
+     * @param errorInfo         AI 调用失败时的错误信息（null 表示成功）
+     * @param relatedPlanId     关联方案 id（可为 null）
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public ChatMessage saveAssistantMessage(Long conversationId, Long replyToMessageId,
+                                             String content, String errorInfo, Long relatedPlanId) {
+        int seq = nextSeqLocked(conversationId);
+        boolean hasError = StringUtils.hasText(errorInfo);
+
+        ChatMessage msg = ChatMessage.builder()
+                .msgNo("MSG_" + UUID.randomUUID().toString().replace("-", "").substring(0, 24))
+                .conversationId(conversationId)
+                .seq(seq)
+                .senderType("ASSISTANT")
+                .messageType("TEXT")
+                .content(hasError ? null : content)
+                .replyToMessageId(replyToMessageId)
+                .relatedPlanId(relatedPlanId)
+                .requestId(org.slf4j.MDC.get("requestId"))
+                .status(hasError ? "FAILED" : "COMPLETED")
+                .build();
+
+        if (hasError) {
+            String clean = errorInfo.replaceAll("[\"\\n\\r]", " ").substring(0, Math.min(200, errorInfo.length()));
+            msg.setPayloadJson("{\"error\":\"" + clean + "\"}");
+        }
+
+        messageMapper.insert(msg);
+        log.info("保存 AI 回复 conversationId={} seq={} status={}", conversationId, seq, msg.getStatus());
+        return msg;
+    }
 
     /** 查找会话内最后一条 ASSISTANT 消息（幂等命中时返回对应 AI 回复）。 */
     private ChatMessage findLatestAssistant(Long conversationId) {

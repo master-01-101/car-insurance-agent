@@ -1,0 +1,1386 @@
+[
+  {
+    "term": "机动车第三者责任保险",
+    "code": "third_party_liability",
+    "aliases": [
+      "三者",
+      "第三者"
+    ],
+    "definition": "对应第三者责任险种，保额表示约定责任限额。具体保险责任以产品条款为准。",
+    "version": 1,
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "机动车损失保险",
+    "code": "vehicle_damage",
+    "aliases": [
+      "车损"
+    ],
+    "definition": "车辆损失相关险种，责任范围以产品条款为准。",
+    "version": 1,
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "机动车交通事故责任强制保险",
+    "code": "compulsory",
+    "aliases": [
+      "交强"
+    ],
+    "definition": "交强险的规范名称。",
+    "version": 1,
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "车辆识别代号",
+    "code": "vin",
+    "aliases": [
+      "车架号",
+      "VIN",
+      "vin"
+    ],
+    "definition": "车辆识别代号，业务查询时使用 vin 字段。",
+    "version": 1,
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "核保",
+    "code": "underwriting",
+    "aliases": [
+      "核保"
+    ],
+    "definition": "保险公司审核投保资料并返回是否承保及补件要求。",
+    "version": 1,
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "出单",
+    "code": "policy",
+    "aliases": [
+      "出单",
+      "保单"
+    ],
+    "definition": "保险单签发，具体结果以业务系统返回为准。",
+    "version": 1,
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "单交",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:2",
+    "aliases": [
+      "单交",
+      "交强"
+    ],
+    "definition": "只投交强险；对应险种：交强险；办理前需确认：是否真的不要商业险（提示脱险风险）",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:2",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "交三",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:3",
+    "aliases": [
+      "交三"
+    ],
+    "definition": "交强险 + 三者险；对应险种：交强+商业三者；办理前需确认：三者保额档位（100/200/300万）",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:3",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "交三不计免",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:4",
+    "aliases": [
+      "交三不计免"
+    ],
+    "definition": "交强+三者+不计免赔；对应险种：综改后已并入，提示无需单买",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:4",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "含损",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:5",
+    "aliases": [
+      "含损",
+      "含车损"
+    ],
+    "definition": "交强+三者+车损；对应险种：交强+商业（含车损）；办理前需确认：三者保额；是否含座位",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:5",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "全险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:6",
+    "aliases": [
+      "全险"
+    ],
+    "definition": "“全险”没有统一的险种组合，须向用户询问具体险种和保额。",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:6",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "三者",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:7",
+    "aliases": [
+      "三者",
+      "三责"
+    ],
+    "definition": "第三者责任险；对应险种：商业三者；办理前需确认：保额档位",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:7",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "座位",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:8",
+    "aliases": [
+      "座位"
+    ],
+    "definition": "车上人员责任险；对应险种：司机位/乘客位；办理前需确认：每座保额（1万/5万/10万）",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:8",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "驾乘",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:9",
+    "aliases": [
+      "驾乘"
+    ],
+    "definition": "驾乘意外险；对应险种：跟人/跟车两种；办理前需确认：跟人还是跟车",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:9",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "单商业",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:10",
+    "aliases": [
+      "单商业"
+    ],
+    "definition": "只投商业险（交强在别家）；对应险种：商业险；办理前需确认：交强起保日，避免脱节",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:10",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "交三损",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:11",
+    "aliases": [
+      "交三损",
+      "交三车"
+    ],
+    "definition": "交强险 + 三者险 + 车损险；对应险种：交强 + 三者 + 车损；办理前需确认：三者保额；是否附加座位、医保外用药",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:11",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "交三车座",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:12",
+    "aliases": [
+      "交三车座"
+    ],
+    "definition": "交强险 + 三者 + 车损 + 座位险；对应险种：交强 + 三者 + 车损 + 车上人员责任险；办理前需确认：三者保额、每座座位保额",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:12",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "医保外",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:13",
+    "aliases": [
+      "医保外",
+      "外用药"
+    ],
+    "definition": "附加医保外医疗费用责任险；对应险种：附加险（分三者医保外、座位医保外）；办理前需确认：附加在三者下面还是座位下面；保额",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:13",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "节假日翻倍",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:14",
+    "aliases": [
+      "节假日翻倍",
+      "假日三者"
+    ],
+    "definition": "法定节假日三者限额翻倍险；对应险种：三者险附加险；办理前需确认：家用车才可投保；三者现有保额",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:14",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "代步险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:15",
+    "aliases": [
+      "代步险",
+      "停驶补偿"
+    ],
+    "definition": "修理期间费用补偿险；对应险种：车损险附加险；办理前需确认：单日补偿额度、最高补偿天数",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:15",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "精神抚慰金",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:16",
+    "aliases": [
+      "精神抚慰金"
+    ],
+    "definition": "精神损害抚慰金责任险；对应险种：附加险（可附加三者 / 座位）；办理前需确认：附加对象、投保限额",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:16",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "单三",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:17",
+    "aliases": [
+      "单三",
+      "纯三者"
+    ],
+    "definition": "仅商业第三者责任险，不交强；对应险种：商业三者险；办理前需确认：交强险生效日期，防止保障断档、违法上路",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:17",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "单损",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:18",
+    "aliases": [
+      "单损"
+    ],
+    "definition": "仅商业险含车损；对应险种：商业险车损险；办理前需确认：交强险生效日期，防止保障断档、违法上路",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:18",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "指定修",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:19",
+    "aliases": [
+      "指定修",
+      "指定修理厂"
+    ],
+    "definition": "附加指定修理厂险；对应险种：车损险内含责任（综改已并入）；办理前需确认：无需额外购买，告知客户责任已包含",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:19",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "无法找到第三方",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:20",
+    "aliases": [
+      "无法找到第三方",
+      "无三方"
+    ],
+    "definition": "无法找到第三方特约险；对应险种：车损险内含责任（综改已并入）；办理前需确认：无需额外购买",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:20",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "涉水",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:21",
+    "aliases": [
+      "涉水",
+      "水险"
+    ],
+    "definition": "发动机涉水损失险；对应险种：车损险内含责任（综改已并入）；办理前需确认：提醒客户泡水禁止二次启动",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:21",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "自燃险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:22",
+    "aliases": [
+      "自燃险"
+    ],
+    "definition": "自燃损失险；对应险种：车损险内含责任（综改已并入）；办理前需确认：老车重点提示自燃保障已包含",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:22",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "盗抢",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:23",
+    "aliases": [
+      "盗抢"
+    ],
+    "definition": "全车盗抢险；对应险种：车损险内含责任（综改已并入）；办理前需确认：整车被盗赔付，零部件单独丢失不赔",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:23",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "玻璃险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:24",
+    "aliases": [
+      "玻璃险"
+    ],
+    "definition": "玻璃单独破碎险；对应险种：车损险内含责任（综改已并入）；办理前需确认：区分国产玻璃 / 进口玻璃（部分公司可选）",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:24",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "增值包",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:25",
+    "aliases": [
+      "增值包",
+      "救援包"
+    ],
+    "definition": "增值服务特约条款（拖车、代驾、代送检）；对应险种：增值服务特约；办理前需确认：是保单赠送，还是单独付费选购",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:25",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "座医保外",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:26",
+    "aliases": [
+      "座医保外"
+    ],
+    "definition": "座位医保外用药责任险；对应险种：车上人员责任险附加医保外；办理前需确认：每座保额、医疗费用限额",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:26",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "纯交强不买车损",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:27",
+    "aliases": [
+      "纯交强不买车损"
+    ],
+    "definition": "仅投保交强险，放弃车损类全部保障；对应险种：交强险；办理前需确认：车辆年限、停车环境，提示磕碰、自燃、被盗需自费承担风险",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:27",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "百万三者",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:28",
+    "aliases": [
+      "百万三者"
+    ],
+    "definition": "保额 100 万档次的第三者责任险；对应险种：商业三者险；办理前需确认：确认是否升级 200/300 万、是否附加医保外用药",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:28",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "全车医保外",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:29",
+    "aliases": [
+      "全车医保外"
+    ],
+    "definition": "同时附加三者医保外 + 座位医保外两类责任；对应险种：三者险附加医保外 + 座位险附加医保外；办理前需确认：两类责任各自单座 / 单次保额上限",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:29",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "老车自燃险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:30",
+    "aliases": [
+      "老车自燃险"
+    ],
+    "definition": "老旧车辆单独补充自燃保障（综改后车损自带，老车强化需求）；对应险种：车损险内含自燃责任；办理前需确认：车龄是否超 8 年、线路老化情况，无需重复投保",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:30",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "跟人驾乘",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:31",
+    "aliases": [
+      "跟人驾乘"
+    ],
+    "definition": "驾乘意外险绑定投保人员身份、不绑定车辆；对应险种：驾乘意外险（跟人版）；办理前需确认：投保人数、单人基础保额、是否含意外医疗",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:31",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "跟车驾乘",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:32",
+    "aliases": [
+      "跟车驾乘"
+    ],
+    "definition": "驾乘意外险绑定车辆、不限乘车人员；对应险种：驾乘意外险（跟车版）；办理前需确认：车辆核载座位数、单座统一保额标准",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:32",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "短期商业险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:33",
+    "aliases": [
+      "短期商业险"
+    ],
+    "definition": "不足 1 年期灵活投保商业险、交强险正常整年投保；对应险种：短期商业险 + 整年交强险；办理前需确认：起止投保日期、脱保空档风险、车船税整年缴纳规则",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:33",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "货车货损险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:34",
+    "aliases": [
+      "货车货损险"
+    ],
+    "definition": "货车专属车上货物损失责任险；对应险种：三者险附加车上货物责任险；办理前需确认：货物品类（违禁品免责）、单次货物赔付限额",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:34",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "划痕补充险",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:35",
+    "aliases": [
+      "划痕补充险"
+    ],
+    "definition": "单独车身划痕附加险（新车常用、老车性价比低）；对应险种：车损附加划痕险；办理前需确认：车辆使用年限、停放区域、划痕赔付累计上限",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:35",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "停驶补贴",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:36",
+    "aliases": [
+      "停驶补贴"
+    ],
+    "definition": "和代步险同类，侧重停运损失补偿（营运货车适用）；对应险种：车损附加停驶补偿；办理前需确认：营运资质、单日停运赔付额度、理赔免赔天数",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:36",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "三者节假日加倍",
+    "code": "3.业务员出单知识库.xlsx_险种口语速查:37",
+    "aliases": [
+      "三者节假日加倍"
+    ],
+    "definition": "法定节假日三者保额自动翻倍（私家车专属）；对应险种：三者险附加节假日翻倍险；办理前需确认：现有三者基础保额、家用车使用属性核验",
+    "category": "coverage",
+    "source": "3.业务员出单知识库.xlsx#险种口语速查:37",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "安诚",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:2",
+    "aliases": [
+      "安诚"
+    ],
+    "definition": "保险公司名称：安诚财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:2",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "安华",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:3",
+    "aliases": [
+      "安华"
+    ],
+    "definition": "保险公司名称：安华财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:3",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "安盛天平",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:4",
+    "aliases": [
+      "安盛天平",
+      "AXA",
+      "安盛",
+      "天平"
+    ],
+    "definition": "保险公司名称：安盛天平财产保险；备注：外资控股",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:4",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "北部湾",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:5",
+    "aliases": [
+      "北部湾"
+    ],
+    "definition": "保险公司名称：北部湾财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:5",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "渤海",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:6",
+    "aliases": [
+      "渤海"
+    ],
+    "definition": "保险公司名称：渤海财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:6",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "诚泰",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:7",
+    "aliases": [
+      "诚泰"
+    ],
+    "definition": "保险公司名称：诚泰财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:7",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "大地",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:8",
+    "aliases": [
+      "大地",
+      "大地财险"
+    ],
+    "definition": "保险公司名称：中国大地财产保险股份有限公司；备注：口语易混，需按本地习惯确认映射",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:8",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "大家",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:9",
+    "aliases": [
+      "大家"
+    ],
+    "definition": "保险公司名称：大家保险集团；备注：原安邦保险，2020年重组更名",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:9",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "鼎和",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:10",
+    "aliases": [
+      "鼎和"
+    ],
+    "definition": "保险公司名称：中国鼎和财产保险有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:10",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "都邦",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:11",
+    "aliases": [
+      "都邦"
+    ],
+    "definition": "保险公司名称：都邦财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:11",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "富德",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:12",
+    "aliases": [
+      "富德"
+    ],
+    "definition": "保险公司名称：富德财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:12",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "国任",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:13",
+    "aliases": [
+      "国任"
+    ],
+    "definition": "保险公司名称：国任财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:13",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "国寿财",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:14",
+    "aliases": [
+      "国寿财",
+      "人寿财险"
+    ],
+    "definition": "保险公司名称：中国人寿财险；备注：注意与寿险区分",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:14",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "合众",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:15",
+    "aliases": [
+      "合众"
+    ],
+    "definition": "保险公司名称：合众财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:15",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "恒邦",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:16",
+    "aliases": [
+      "恒邦"
+    ],
+    "definition": "保险公司名称：恒邦财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:16",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "华安",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:17",
+    "aliases": [
+      "华安"
+    ],
+    "definition": "保险公司名称：华安财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:17",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "华农",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:18",
+    "aliases": [
+      "华农"
+    ],
+    "definition": "保险公司名称：华农财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:18",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "华泰",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:19",
+    "aliases": [
+      "华泰"
+    ],
+    "definition": "保险公司名称：华泰保险集团",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:19",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "黄河",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:20",
+    "aliases": [
+      "黄河"
+    ],
+    "definition": "保险公司名称：黄河财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:20",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "锦泰",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:21",
+    "aliases": [
+      "锦泰"
+    ],
+    "definition": "保险公司名称：锦泰财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:21",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "京东安联",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:22",
+    "aliases": [
+      "京东安联"
+    ],
+    "definition": "保险公司名称：京东安联财产保险有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:22",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "利宝",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:23",
+    "aliases": [
+      "利宝"
+    ],
+    "definition": "保险公司名称：利宝保险有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:23",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "美亚",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:24",
+    "aliases": [
+      "美亚",
+      "AIG"
+    ],
+    "definition": "保险公司名称：美亚财产保险；备注：外资",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:24",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "平安",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:25",
+    "aliases": [
+      "平安"
+    ],
+    "definition": "保险公司名称：中国平安",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:25",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "前海联合",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:26",
+    "aliases": [
+      "前海联合",
+      "新疆前海"
+    ],
+    "definition": "保险公司名称：新疆前海联合财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:26",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "人保",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:27",
+    "aliases": [
+      "人保",
+      "PICC"
+    ],
+    "definition": "保险公司名称：中国人保",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:27",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "申能",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:28",
+    "aliases": [
+      "申能"
+    ],
+    "definition": "保险公司名称：申能财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:28",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "三星财险",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:29",
+    "aliases": [
+      "三星财险",
+      "三星"
+    ],
+    "definition": "保险公司名称：三星财产保险；备注：外资",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:29",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "太保",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:30",
+    "aliases": [
+      "太保",
+      "太平洋"
+    ],
+    "definition": "保险公司名称：太平洋保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:30",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "太平财险",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:31",
+    "aliases": [
+      "太平财险",
+      "太平"
+    ],
+    "definition": "保险公司名称：太平财产保险；备注：注意与太平洋区分",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:31",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "泰康在线",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:32",
+    "aliases": [
+      "泰康在线",
+      "泰康"
+    ],
+    "definition": "保险公司名称：泰康在线财产保险；备注：互联网保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:32",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "泰山",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:33",
+    "aliases": [
+      "泰山"
+    ],
+    "definition": "保险公司名称：泰山财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:33",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "现代",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:34",
+    "aliases": [
+      "现代"
+    ],
+    "definition": "保险公司名称：现代财产保险（中国）有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:34",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "天安",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:35",
+    "aliases": [
+      "天安"
+    ],
+    "definition": "保险公司名称：天安财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:35",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "亚太",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:36",
+    "aliases": [
+      "亚太"
+    ],
+    "definition": "保险公司名称：亚太财产保险有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:36",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "燕赵",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:37",
+    "aliases": [
+      "燕赵"
+    ],
+    "definition": "保险公司名称：燕赵财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:37",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "阳光财险",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:38",
+    "aliases": [
+      "阳光财险",
+      "阳光"
+    ],
+    "definition": "保险公司名称：阳光财产保险；备注：与阳光人寿区分",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:38",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "永安",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:39",
+    "aliases": [
+      "永安"
+    ],
+    "definition": "保险公司名称：永安财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:39",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "永诚",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:40",
+    "aliases": [
+      "永诚"
+    ],
+    "definition": "保险公司名称：永诚财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:40",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "长安责任",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:41",
+    "aliases": [
+      "长安责任",
+      "长安"
+    ],
+    "definition": "保险公司名称：长安责任保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:41",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "浙商",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:42",
+    "aliases": [
+      "浙商"
+    ],
+    "definition": "保险公司名称：浙商财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:42",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "中华",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:43",
+    "aliases": [
+      "中华",
+      "中华联合"
+    ],
+    "definition": "保险公司名称：中华联合财产保险；备注：注意不要简称为'中联'",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:43",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "中意财险",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:44",
+    "aliases": [
+      "中意财险"
+    ],
+    "definition": "保险公司名称：中意财产保险；备注：外资",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:44",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "中银",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:45",
+    "aliases": [
+      "中银"
+    ],
+    "definition": "保险公司名称：中银保险有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:45",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "众安",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:46",
+    "aliases": [
+      "众安"
+    ],
+    "definition": "保险公司名称：众安在线财产保险；备注：互联网保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:46",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "紫金",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:47",
+    "aliases": [
+      "紫金"
+    ],
+    "definition": "保险公司名称：紫金财产保险",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:47",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "珠峰",
+    "code": "3.业务员出单知识库.xlsx_保司口语映射:48",
+    "aliases": [
+      "珠峰"
+    ],
+    "definition": "保险公司名称：珠峰财产保险股份有限公司",
+    "category": "insurer",
+    "source": "3.业务员出单知识库.xlsx#保司口语映射:48",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "新车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:2",
+    "aliases": [
+      "新车"
+    ],
+    "definition": "未上牌车辆 → 用车架号报价，需合格证",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:2",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "过户车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:3",
+    "aliases": [
+      "过户车"
+    ],
+    "definition": "刚完成过户 → 需新行驶证+过户凭证",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:3",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "脱保",
+    "code": "3.业务员出单知识库.xlsx_场景口语:4",
+    "aliases": [
+      "脱保"
+    ],
+    "definition": "商业险已过期 → 可能要验车拍照",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:4",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "续保",
+    "code": "3.业务员出单知识库.xlsx_场景口语:5",
+    "aliases": [
+      "续保"
+    ],
+    "definition": "上年在本司 → 可查上年方案对比",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:5",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "转保",
+    "code": "3.业务员出单知识库.xlsx_场景口语:6",
+    "aliases": [
+      "转保"
+    ],
+    "definition": "上年在他司 → 需上年保单信息核NCD",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:6",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "营运车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:7",
+    "aliases": [
+      "营运车",
+      "网约车",
+      "跑滴滴"
+    ],
+    "definition": "使用性质为营运 → 费率完全不同，必须核实行驶证",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:7",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "团单",
+    "code": "3.业务员出单知识库.xlsx_场景口语:8",
+    "aliases": [
+      "团单"
+    ],
+    "definition": "企业多台车 → 走企业投保流程",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:8",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "私家车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:9",
+    "aliases": [
+      "私家车",
+      "家用车"
+    ],
+    "definition": "家庭自用客车",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:9",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "二手车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:10",
+    "aliases": [
+      "二手车"
+    ],
+    "definition": "二手过户车辆 → 需新行驶证+过户协议，确认过户日期",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:10",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "按揭车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:11",
+    "aliases": [
+      "按揭车",
+      "贷款车"
+    ],
+    "definition": "车辆有贷款 → 第一受益人通常为银行/金融公司，需确认贷款机构",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:11",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "公户车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:12",
+    "aliases": [
+      "公户车"
+    ],
+    "definition": "车辆登记在企业名下 → 需营业执照、统一社会信用代码",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:12",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "挂靠车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:13",
+    "aliases": [
+      "挂靠车"
+    ],
+    "definition": "车辆挂靠运输公司 → 需确认实际所有人，行驶证登记人与实际不符",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:13",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "进口车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:14",
+    "aliases": [
+      "进口车"
+    ],
+    "definition": "进口车辆投保 → 需进口凭证，确认是否中规车",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:14",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "摩托车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:15",
+    "aliases": [
+      "摩托车"
+    ],
+    "definition": "两轮/三轮摩托车 → 需摩托车行驶证，部分地区有限制",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:15",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "农用车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:16",
+    "aliases": [
+      "农用车"
+    ],
+    "definition": "农用车辆 → 需农机行驶证，注意使用范围限制",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:16",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "纯电",
+    "code": "3.业务员出单知识库.xlsx_场景口语:17",
+    "aliases": [
+      "纯电",
+      "纯电动"
+    ],
+    "definition": "纯电动新能源车 → 电池条款、费率与燃油车不同",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:17",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "混动",
+    "code": "3.业务员出单知识库.xlsx_场景口语:18",
+    "aliases": [
+      "混动",
+      "增程"
+    ],
+    "definition": "混合动力/增程式 → 新能源车条款，确认动力类型",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:18",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "批改",
+    "code": "3.业务员出单知识库.xlsx_场景口语:19",
+    "aliases": [
+      "批改"
+    ],
+    "definition": "保单信息变更 → 过户、改色、换牌等需走批改流程",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:19",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "退保",
+    "code": "3.业务员出单知识库.xlsx_场景口语:20",
+    "aliases": [
+      "退保"
+    ],
+    "definition": "解除保险合同 → 退还剩余保费，交强险退保有条件限制",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:20",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "验车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:21",
+    "aliases": [
+      "验车"
+    ],
+    "definition": "核保要求实车查验 → 需拍照（车架号、外观、里程表等）",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:21",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "指定驾驶人",
+    "code": "3.业务员出单知识库.xlsx_场景口语:22",
+    "aliases": [
+      "指定驾驶人"
+    ],
+    "definition": "保单限定特定驾驶人 → 影响保费，非指定人驾驶出险可能影响赔付",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:22",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "临牌",
+    "code": "3.业务员出单知识库.xlsx_场景口语:23",
+    "aliases": [
+      "临牌"
+    ],
+    "definition": "临时牌照车辆 → 可用临牌投保，需后续补正式牌照",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:23",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "转籍",
+    "code": "3.业务员出单知识库.xlsx_场景口语:24",
+    "aliases": [
+      "转籍"
+    ],
+    "definition": "车辆转出原籍 → 需在新籍地重新投保，原保单可退保",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:24",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "报停",
+    "code": "3.业务员出单知识库.xlsx_场景口语:25",
+    "aliases": [
+      "报停"
+    ],
+    "definition": "车辆暂停使用 → 可申请报停，暂停期间保费按比例计算",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:25",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "复驶",
+    "code": "3.业务员出单知识库.xlsx_场景口语:26",
+    "aliases": [
+      "复驶"
+    ],
+    "definition": "报停后恢复行驶 → 需办理复驶手续并补缴保费",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:26",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "挂车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:27",
+    "aliases": [
+      "挂车"
+    ],
+    "definition": "挂车单独投保 → 有独立保单，牵引车和挂车分别承保",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:27",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "异地车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:28",
+    "aliases": [
+      "异地车"
+    ],
+    "definition": "车辆异地投保 → 需确认投保地是否有分支，注意异地理赔差异",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:28",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "高价值车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:29",
+    "aliases": [
+      "高价值车"
+    ],
+    "definition": "高端车辆 → 可能需特殊核保，费率上浮，指定修理厂",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:29",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "营运货车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:30",
+    "aliases": [
+      "营运货车"
+    ],
+    "definition": "货运营运车辆 → 需营运证、道路运输证，费率较高",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:30",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "换车",
+    "code": "3.业务员出单知识库.xlsx_场景口语:31",
+    "aliases": [
+      "换车"
+    ],
+    "definition": "旧车卖掉换新车 → 旧车可退保/批改，新车重新投保",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:31",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "加保",
+    "code": "3.业务员出单知识库.xlsx_场景口语:32",
+    "aliases": [
+      "加保"
+    ],
+    "definition": "保单有效期内增加险种 → 走批改流程，保费按天补差",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:32",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "减保",
+    "code": "3.业务员出单知识库.xlsx_场景口语:33",
+    "aliases": [
+      "减保"
+    ],
+    "definition": "保单有效期内减少险种 → 走批改流程，退还差额保费",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:33",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "全损",
+    "code": "3.业务员出单知识库.xlsx_场景口语:34",
+    "aliases": [
+      "全损"
+    ],
+    "definition": "车辆全损报废 → 按保额赔付后保单终止，需注销车辆",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:34",
+    "reviewer": "待团队审核"
+  },
+  {
+    "term": "推定全损",
+    "code": "3.业务员出单知识库.xlsx_场景口语:35",
+    "aliases": [
+      "推定全损"
+    ],
+    "definition": "维修费超过实际价值 → 按全损处理，按保额赔付",
+    "category": "scenario",
+    "source": "3.业务员出单知识库.xlsx#场景口语:35",
+    "reviewer": "待团队审核"
+  }
+]
