@@ -9,3 +9,4 @@ mock_files/
 .vscode/
 .idea/
 .DS_Store
+*.md
