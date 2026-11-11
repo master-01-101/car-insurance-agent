@@ -72,6 +72,13 @@ app:
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
 
+# ---------- JWT ----------
+jwt:
+  # HS256 对称密钥，32 字节以上（必须！），走环境变量
+  secret: ${JWT_SECRET:car-insurance-agent-backend-dev-secret-key-min-32-bytes!}
+  access-token-expire-minutes: 120   # 2h
+  refresh-token-expire-days: 7
+
 # ---------- Actuator ----------
 management:
   endpoints:
